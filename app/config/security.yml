@@ -1,20 +1,23 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
-
+    encoders:
+        RTool\UserBundle\Entity\User:
+            algorithm: bcrypt
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        our_db_provider:
+            entity:
+                class: RTool\UserBundle\Entity\User
+                property: username
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         main:
             anonymous: ~
+            pattern: ^/
+            http_basic: ~
+            provider: our_db_provider
+
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -22,3 +25,15 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            form_login:
+              login_path: login_form
+              check_path: login_check
+              default_target_path: view_user_list
+
+            logout:
+              path: /logout
+              target: /login
+
+    access-control:
+            - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+            - { path: ^/user, role: ROLE_USER}

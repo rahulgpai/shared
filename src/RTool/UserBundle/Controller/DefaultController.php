@@ -2,26 +2,20 @@
 
 namespace RTool\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="homepage")
      */
-    public function indexAction()
-    {        
-        return $this->render('RToolUserBundle:Default:index.html.twig');                
-    }
-    
-    /**
-     * @Route("/hello")
-     */
-    public function helloAction()
+    public function indexAction(Request $request)
     {
-        return new Response('Hello world!');
+        // replace this example code with whatever you need
+        return $this->render('default/index.html.twig', array(
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+        ));
     }
 }

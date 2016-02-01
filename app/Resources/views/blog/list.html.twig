@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form(form) }}
+
+    {% for blog in blogs %}
+        {{ blog }}
+    {% endfor %}
+{% endblock %}

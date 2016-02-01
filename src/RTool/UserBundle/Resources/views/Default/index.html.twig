@@ -5,8 +5,7 @@
             href="{{ asset('/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }}">         
 
 		<link rel="stylesheet"
-            href="{{ asset('/css/login.css') }}">                     
-
+            href="{{ asset('/css/login.css') }}">
 {% endblock %}
 
 {% block navigation %}
@@ -18,17 +17,19 @@
     <div class="container">
         <div class="card card-container">
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me 
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-success btn-block btn-signin" type="submit">Sign In</button>
-            </form><!-- /form -->
+            <form class="form-signin" action="{{ path('/login_check') }}" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="_username" class="form-control" placeholder="Username" value="{{ lastusername }}" required autofocus />
+
+
+                <label for="password" class="form-control">Password</label>
+                <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required />
+
+                <input type="hidden" name="_target_path" value="/account" />
+
+                <button type="submit" class="btn btn-lg btn-success btn-block btn-signin">Sign In</button>
+
+            </form>
             <a href="#" class="forgot-password">
                 Forgot password ?
             </a>
