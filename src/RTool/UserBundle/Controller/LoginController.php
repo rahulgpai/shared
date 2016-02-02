@@ -27,13 +27,13 @@ class LoginController extends Controller
 
         if($this->getUser())
         {
-            return $this->redirectToRoute('homepage', [], 301);
+            return $this->redirectToRoute('/login', [], 301);
         }
 
-        $form = $this->createForm(UserType::class, new User())
-            ->add('Login', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
+        $form = $this->createForm(UserType::class, new User(), ['action' => '/login_check', 'method' => 'POST', 'attr' => ['class' => 'form-signin']])
+            ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', ['label' => 'Login']);
 
-        return $this->render('login/login.html.twig', ['error' => $error, 'lastusername' => $lastusername, 'form'=> $form->createView()]);
+        return $this->render('login/login.html.twig', ['error' => $error, 'lastusername' => $lastusername, 'form'=> $form->createView(), 'formLabel' => 'Login Form']);
     }
 
     /**

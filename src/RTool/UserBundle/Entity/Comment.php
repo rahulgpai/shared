@@ -28,7 +28,7 @@ class Comment
     /**
      * @var
      * @ORM\Column(type="text", name="comments", length=2000)
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Blog", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="RTool\UserBundle\Entity\Blog", inversedBy="comments")
      */
     protected $comments;
 

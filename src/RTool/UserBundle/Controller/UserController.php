@@ -18,29 +18,22 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
-     * @Route(path="/user/show", name="user_show")
-     *
-     *
-     */
-    public function showAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager()->getRepository(User::class);
-
-        $userList = $em->findAll();
-
-        return $this->render('users/show.html.twig', ['userlist' => $userList]);
-    }
-
-    /**
      * @Route("/user/add", name="add_user_form")
      */
     public function addUserAction(Request $request)
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user)
-                     ->add('email', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-                     ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', ['label', 'Add User']);
+        $rolesArr = $user->rolesArray;
+
+        $form = $this->createForm(UserType::class, $user, ['action' => '/user/add', 'method' => 'POST'])
+                     ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', ['label' => 'User Email'])
+                     ->add('roles', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                         ['label' => 'User Roles', 'choices' => $rolesArr, 'choices_as_values'=>true,
+                             'choice_label' => function($rolesArr, $key, $index){
+                                 return strtoupper($key);
+                             }, 'multiple'=>true, 'expanded'=>true])
+                     ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', ['label' => 'Add User']);
 
         $form->handleRequest($request);
 
@@ -58,7 +51,7 @@ class UserController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute("view_user_list", []);
+            return $this->redirectToRoute("view_user_list", [], 301);
         }
 
         return $this->render('users/adduser.html.twig', ['form' => $form->createView()]);

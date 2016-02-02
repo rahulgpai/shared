@@ -76,9 +76,13 @@ class User implements UserInterface, \Serializable
      */
     protected $roles = [];
 
+
+    public $rolesArray = ['USER' => 'ROLE_USER', 'ADMIN' => 'ROLE_ADMIN'];
+
     /**
      * User constructor.
      */
+
     public function __construct()
     {
         $this->setAddedOn(new \DateTime());
