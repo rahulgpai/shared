@@ -8,7 +8,6 @@
 
 namespace RTool\UserBundle\Controller;
 
-
 use RTool\UserBundle\Entity\User;
 use RTool\UserBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -1,36 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    
-    <link rel="stylesheet"
-            href="{{ asset('/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }}">         
-
-		<link rel="stylesheet"
-            href="{{ asset('/css/login.css') }}">          
-
- 
-
+{% block stylesheets %}    
+    <link rel="stylesheet" href="{{ asset('/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }}">         
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
 {% endblock %}
 
 {% block body %}    
-     <div class="container">    
-         <div class="card card-container">
-                <div class="panel-primary">
-                    <div class="panel-heading">
-                        {{ formLabel }}
-                    </div>
-                    <div class="panel-body">
+    <div class="container">    
+        <div class="card card-container">
+            <p id="profile-name" class="profile-name-card"> {{ formLabel }}</p>                
+                    
+                       
+                    
+                    
                         {% if(error) %}
-                            <div class="panel-info">
-                                <div class="panel-heading">
-                                    {{ error.message }}
-                                </div>
+                            <div>                                
+                                {{ error.message }}                                
                             </div>
                         {% endif %}
-
                         {{ form(form) }}
-                    </div>
-                </div>       
+                    
+                
             </div><!-- /card-container -->
     </div><!-- /container -->
 {% endblock %}
