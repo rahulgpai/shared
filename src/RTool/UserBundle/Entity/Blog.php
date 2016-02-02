@@ -66,7 +66,7 @@ class Blog
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="comments", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="RTool\UserBundle\Entity\Comment", mappedBy="comments", orphanRemoval=true)
      * @ORM\OrderBy(value={"DESC"})
      */
     private $comments;
