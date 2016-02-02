@@ -1,28 +1,36 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
 {% block stylesheets %}
+    
+    <link rel="stylesheet"
+            href="{{ asset('/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }}">         
 
-    {{ parent() }}
+		<link rel="stylesheet"
+            href="{{ asset('/css/login.css') }}">          
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
+ 
 
 {% endblock %}
 
-{% block body %}
-    <div class="panel-primary">
-        <div class="panel-heading">
-            {{ formLabel }}
-        </div>
-        <div class="panel-body">
-            {% if(error) %}
-                <div class="panel-info">
+{% block body %}    
+     <div class="container">    
+         <div class="card card-container">
+                <div class="panel-primary">
                     <div class="panel-heading">
-                        {{ error.message }}
+                        {{ formLabel }}
                     </div>
-                </div>
-            {% endif %}
+                    <div class="panel-body">
+                        {% if(error) %}
+                            <div class="panel-info">
+                                <div class="panel-heading">
+                                    {{ error.message }}
+                                </div>
+                            </div>
+                        {% endif %}
 
-            {{ form(form) }}
-        </div>
-    </div>
+                        {{ form(form) }}
+                    </div>
+                </div>       
+            </div><!-- /card-container -->
+    </div><!-- /container -->
 {% endblock %}

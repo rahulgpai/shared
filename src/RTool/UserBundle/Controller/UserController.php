@@ -26,7 +26,7 @@ class UserController extends Controller
 
         $rolesArr = $user->rolesArray;
 
-        $form = $this->createForm(UserType::class, $user, ['action' => '/user/add', 'method' => 'POST'])
+        $form = $this->createForm(UserType::class, $user, ['action' => '../user/add', 'method' => 'POST'])
                      ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', ['label' => 'User Email'])
                      ->add('roles', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                          ['label' => 'User Roles', 'choices' => $rolesArr, 'choices_as_values'=>true,
